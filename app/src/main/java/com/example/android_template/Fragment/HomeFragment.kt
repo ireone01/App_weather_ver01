@@ -7,6 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android_template.*
+import com.example.android_template.Adapter.HomeAdapter
+import com.example.android_template.Data.CurrentCondition
+import com.example.android_template.Data.Data
+import com.example.android_template.Data.ForecastDay
+import com.example.android_template.Data.ForecastHour
+import com.example.android_template.Data.SunMoon
+import com.example.android_template.Data.fetSunMoon
+//import com.example.android_template.Data.fetchForecastDay
+import com.example.android_template.Data.fetchForecastHour
+import com.example.android_template.Data.fetchWeatherData
 import com.example.android_template.databinding.HomeFragmentBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,9 +26,7 @@ import kotlinx.coroutines.launch
 class HomeFragment : Fragment() {
     private lateinit var binding: HomeFragmentBinding
     private lateinit var mList: ArrayList<Data>
-    private val ApiKey = "SC8yMrpOtTb4IJA2MFxXHzlvrVMAxcNy"
-    private val ApiOpenweather = "642d01a3e5247c272aff66837e11bf7e"
-    private lateinit var LocationKey: String
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,17 +48,11 @@ class HomeFragment : Fragment() {
 //        val adapter = HomeAdapter(mList)
 //        binding.mainRecyclerView.adapter = adapter
 
-
-        LocationKey ="353412"
-        var ApiUrl = "https://dataservice.accuweather.com/currentconditions/v1/$LocationKey?apikey=$ApiKey&details=true"
-        var ApiSunMoon ="https://dataservice.accuweather.com/forecasts/v1/daily/1day/$LocationKey?apikey=$ApiKey&details=true"
-        var ApiForecast_hour = "https://dataservice.accuweather.com/forecasts/v1/hourly/12hour/$LocationKey?apikey=$ApiKey&details=true"
-        var ApiForecast_day ="https://dataservice.accuweather.com/forecasts/v1/daily/5day/$LocationKey?apikey=$ApiKey&details=true"
         CoroutineScope(Dispatchers.Main).launch {
-            val currentCondition =async { fetchWeatherData(ApiUrl) }
-            val sunMoon  = async { fetSunMoon(ApiSunMoon) }
-            val forecastHour = async { fetchForecastHour(ApiForecast_hour) }
-            val forecastDay = async { fetchForecastDay(ApiForecast_day) }
+            val currentCondition =async { fetchWeatherData(Api.apiUrl) }
+            val sunMoon  = async { fetSunMoon(Api.apiSunMoon) }
+            val forecastHour = async { fetchForecastHour(Api.apiForecastHour) }
+//            val forecastDay = async { fetchForecastDay(Api.apiForecastHour) }
             currentCondition.await().let {
                 mList.add(Data.CurrentConditionData(it))
             }
@@ -60,9 +62,9 @@ class HomeFragment : Fragment() {
             forecastHour.await().let {
                 mList.add(Data.ForecastHourData(it))
             }
-            forecastDay.await().let {
-                mList.add(Data.ForecastDayData(it))
-            }
+//            forecastDay.await().let {
+//                mList.add(Data.ForecastDayData(it))
+//            }
             val adapter = HomeAdapter(mList)
             binding.mainRecyclerView.adapter = adapter
         }
