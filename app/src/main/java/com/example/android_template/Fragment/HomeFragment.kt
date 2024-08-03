@@ -16,6 +16,7 @@ import com.example.android_template.Data.SunMoon
 import com.example.android_template.Data.fetSunMoon
 import com.example.android_template.Data.fetchForecastDay
 import com.example.android_template.Data.fetchForecastHour
+import com.example.android_template.Data.fetchHourlyFragment
 import com.example.android_template.Data.fetchWeatherData
 import com.example.android_template.databinding.HomeFragmentBinding
 import kotlinx.coroutines.CoroutineScope
@@ -54,7 +55,7 @@ class HomeFragment : Fragment() {
             val sunMoon  = async { fetSunMoon(Api.apiSunMoon) }
             val forecastHour = async { fetchForecastHour(Api.apiForecastHour) }
             val forecastDay = async { fetchForecastDay(Api.apiForecastDay) }
-
+            val temp  = async { fetchHourlyFragment(Api.apiForecastHour) }
 
             if(::mList.isInitialized) {
                 mList.clear()
@@ -62,7 +63,9 @@ class HomeFragment : Fragment() {
                 mList=ArrayList()
             }
 
-
+            temp.await().let {
+                mList.add(Data.HourlyFragmentData(it))
+            }
             currentCondition.await().let {
                 mList.add(Data.CurrentConditionData(it))
             }

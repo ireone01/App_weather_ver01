@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="50dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/Img_01"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/sun"
+            app:tint="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/Tv_01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="83*"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="50sp"
+            app:layout_constraintBottom_toBottomOf="@id/Img_01"
+            app:layout_constraintStart_toEndOf="@id/Img_01" />
+
+        <TextView
+            android:id="@+id/Tv_02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="C"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/sunMoonColor"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@id/Tv_01"
+            app:layout_constraintStart_toEndOf="@id/Tv_01" />
+
+        <TextView
+            android:id="@+id/Tv_03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ReelFeels 84*"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintTop_toBottomOf="@id/Tv_01"
+            app:layout_constraintStart_toStartOf="@id/Img_01"
+            app:layout_constraintEnd_toEndOf="@id/Tv_02" />
+
+        <TextView
+            android:id="@+id/Tv_04"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="%Rain : "
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintTop_toBottomOf="@id/Tv_03"
+            app:layout_constraintStart_toStartOf="@id/Tv_03"
+            app:layout_constraintEnd_toEndOf="@id/Tv_03" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

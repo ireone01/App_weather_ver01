@@ -9,8 +9,11 @@ import com.example.android_template.Data.Data
 import com.example.android_template.Data.DataType
 import com.example.android_template.Data.ForecastDay
 import com.example.android_template.Data.ForecastHour
+import com.example.android_template.Data.HourlyFragmentItem
 import com.example.android_template.Data.SunMoon
 import com.example.android_template.databinding.ACurrentConditionBinding
+import com.example.android_template.databinding.ActivityMainBinding
+import com.example.android_template.databinding.HomeFragmentBinding
 
 class HomeAdapter(private val weather : List<Data>) :
 RecyclerView.Adapter<RecyclerView.ViewHolder>(){
@@ -45,6 +48,14 @@ RecyclerView.Adapter<RecyclerView.ViewHolder>(){
                     binding.childRecyclerView.adapter = adapter
                     binding.textA.text = "Theo Ngày"
                 }
+                fun bindTemp(tempList : List<HourlyFragmentItem>){
+                    binding.childRecyclerView.setHasFixedSize(true)
+                    binding.childRecyclerView.layoutManager = LinearLayoutManager(binding.root.context,RecyclerView.VERTICAL,false)
+                    val adapter = ChildAdapter(DataType.TEMP , HourlyFragmentList = tempList)
+                    binding.childRecyclerView.adapter = adapter
+                    binding.textA.text = "Lượng hiện tại"
+                }
+
             }
 
 
@@ -63,10 +74,13 @@ RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     override fun getItemViewType(position: Int): Int {
         return when(weather[position]){
+
                     is Data.CurrentConditionData-> DataType.CURRENT_CONDITION
                     is Data.SunMoonData -> DataType.SUN_MOON_TYPE
                     is Data.ForecastHourData -> DataType.FORECAST_HOUR
                     is Data.ForecastDayData -> DataType.FORECAST_DAY
+
+                    is Data.HourlyFragmentData -> DataType.TEMP
             else -> throw IllegalArgumentException("Invalid")
         }
     }
@@ -91,6 +105,11 @@ RecyclerView.Adapter<RecyclerView.ViewHolder>(){
             is Data.ForecastDayData ->{
                 if(holder is ACurrentConditionHolder){
                     holder.bindForecastDay(data.forecastDayList)
+                }
+            }
+            is Data.HourlyFragmentData ->{
+                if(holder is ACurrentConditionHolder){
+                    holder.bindTemp(data.hourlyFragmentList)
                 }
             }
             else -> throw IllegalArgumentException("Invalid")

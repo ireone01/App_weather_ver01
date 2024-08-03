@@ -24,8 +24,10 @@ import com.example.android_template.databinding.DailyFragmentItemBinding
 import com.example.android_template.databinding.ForecastDayBinding
 import com.example.android_template.databinding.ForecastHourBinding
 import com.example.android_template.databinding.FragmentAppBarBinding
+import com.example.android_template.databinding.HomeFragmentBinding
 import com.example.android_template.databinding.HourFragmentItemBinding
 import com.example.android_template.databinding.SunMoonBinding
+import com.example.android_template.databinding.TempBinding
 
 class ChildAdapter(private val ViewType : Int
                    , private val CurrentConditionList : List<CurrentCondition> = listOf()
@@ -156,6 +158,33 @@ class ChildAdapter(private val ViewType : Int
         }
 
     }
+    inner class TempHolder(private val binding : TempBinding):
+            RecyclerView.ViewHolder(binding.root){
+                @RequiresApi(Build.VERSION_CODES.O)
+                fun bindTemp(temp : HourlyFragmentItem){
+                    when{
+                        temp.rain.toInt() < 30 ->{
+                            binding.Img01.setImageResource(R.drawable.sun)
+
+                            binding.Tv01.text = fahrenheitToCelsius(temp.tem.toDouble()) + "°"
+                            binding.Tv03.text = "ReelFeels : "+fahrenheitToCelsius(temp.rel_tem.toDouble()) + "°C"
+                            binding.Tv04.text = "Rain :"+ temp.rain + "%"
+                        }
+                        (temp.rain.toInt() <50) ->{
+                            binding.Img01.setImageResource(R.drawable.cloud)
+                            binding.Tv01.text = fahrenheitToCelsius(temp.tem.toDouble()) + "°"
+                            binding.Tv03.text = "ReelFeels : "+fahrenheitToCelsius(temp.rel_tem.toDouble()) + "°C"
+                            binding.Tv04.text = "Rain :"+ temp.rain + "%"
+                        }
+                        else -> {
+                            binding.Img01.setImageResource(R.drawable.rain)
+                            binding.Tv01.text = fahrenheitToCelsius(temp.tem.toDouble()) + "°"
+                            binding.Tv03.text = "ReelFeels : "+fahrenheitToCelsius(temp.rel_tem.toDouble()) + "°C"
+                            binding.Tv04.text = "Rain :"+ temp.rain + "%"
+                        }
+                    }
+                }
+            }
     inner class DailyFragmentItemHolder(private val binding : DailyFragmentItemBinding):
         RecyclerView.ViewHolder(binding.root){
         @RequiresApi(Build.VERSION_CODES.O)
@@ -258,6 +287,14 @@ class ChildAdapter(private val ViewType : Int
                 )
                 return DailyFragmentItemHolder(binding)
             }
+            DataType.TEMP ->{
+                 val binding = TempBinding.inflate(
+                     LayoutInflater.from(parent.context),
+                     parent,
+                     false
+                 )
+                return TempHolder(binding)
+            }
 
             else ->throw IllegalArgumentException("Invalid view type")
        }
@@ -282,6 +319,9 @@ class ChildAdapter(private val ViewType : Int
           }
           DataType.DAILY_FRAGMENT ->{
               DailyFragmentList.size
+          }
+          DataType.TEMP ->{
+              1
           }
           else -> throw IllegalArgumentException("Invalid view type")
       }
@@ -310,6 +350,9 @@ class ChildAdapter(private val ViewType : Int
             }
             is DailyFragmentItemHolder ->{
                 holder.bindDailyFragmentItem(DailyFragmentList[position])
+            }
+            is TempHolder ->{
+                holder.bindTemp(HourlyFragmentList[position])
             }
         }
 
