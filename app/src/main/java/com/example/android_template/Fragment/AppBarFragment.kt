@@ -47,7 +47,7 @@ class AppBarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fetchData("Cao Bằng")
+        fetchData("Hà Nội")
 
         (activity as? AppCompatActivity)?.setSupportActionBar(binding.toolbar)
         setHasOptionsMenu(true)
@@ -170,12 +170,6 @@ class AppBarFragment : Fragment() {
                     binding.tvCityName.text = city.uppercase()
                     binding.tvTemperature.text = "$temperature°C"
                 }
-                val home = HomeFragment()
-                val hourly = HourlyFragment()
-                val daily = DailyFragment()
-                home.updateWeatherHome()
-                hourly.updateHourly()
-                daily.updateDaily()
             }else{
                 binding.tvCityName.text= "API từ chối phản hồi"
                 binding.tvTemperature.text = " HEHEH"

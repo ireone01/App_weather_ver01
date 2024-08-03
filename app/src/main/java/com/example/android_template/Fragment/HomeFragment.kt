@@ -1,6 +1,7 @@
 package com.example.android_template.Fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,9 +48,14 @@ class HomeFragment : Fragment() {
 
 
         mList = ArrayList()
+
+        Api.onLocationKeyUpdated = {
+            updateWeatherHome()
+        }
         updateWeatherHome()
     }
     fun updateWeatherHome() {
+        Log.d("HomeFragment_TT", "updateWeatherHome called")
         CoroutineScope(Dispatchers.Main).launch {
             val currentCondition =async { fetchWeatherData(Api.apiUrl) }
             val sunMoon  = async { fetSunMoon(Api.apiSunMoon) }
