@@ -26,7 +26,8 @@ class HourlyAdapter(private val weather : List<Data>):
                                 binding.childRecyclerView.adapter = adapter
                                 binding.textA.text = extractDay(hourlyList[0].day)
                             } else {
-                                throw IllegalArgumentException("hourlyList is empty")
+
+                                binding.textA.text = "Không có dữ liệu nhận về từ API"
                             }
                         }
                     }
@@ -60,4 +61,6 @@ class HourlyAdapter(private val weather : List<Data>):
 
         }
     }
+
+
 }

@@ -2,6 +2,8 @@ package com.example.android_template.Fragment
 
 import android.app.Activity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
@@ -10,9 +12,16 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.android_template.Api
+import com.example.android_template.Data.fetDailyFragment
+import com.example.android_template.Data.fetSunMoon
+import com.example.android_template.Data.fetchForecastDay
+import com.example.android_template.Data.fetchForecastHour
+import com.example.android_template.Data.fetchHourlyFragment
+import com.example.android_template.Data.fetchWeatherData
 import com.example.android_template.R
 import com.example.android_template.databinding.FragmentAppBarBinding
 import kotlinx.coroutines.Dispatchers
@@ -38,14 +47,38 @@ class AppBarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fetchWeatherData("Cao Bằng")
+        fetchData("Cao Bằng")
 
         (activity as? AppCompatActivity)?.setSupportActionBar(binding.toolbar)
         setHasOptionsMenu(true)
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
+        val searchItem = menu.findItem(R.id.app_bar_search)
+        val searchView = searchItem.actionView as SearchView
+
+        searchView.setOnQueryTextListener( object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if(!query.isNullOrEmpty()) {
+                    fetchData(query)
+                    searchView.clearFocus()
+                    searchView.setQuery("",false)
+                    searchItem.collapseActionView()
+                    (activity as? AppCompatActivity)?.invalidateOptionsMenu()
+
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                return true
+            }
+
+        })
+
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -58,9 +91,9 @@ class AppBarFragment : Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
-    private fun fetchWeatherData(city: String) {
+    private fun fetchData(city: String) {
         lifecycleScope.launch {
-            val apiKey = "j8aiCZItQzDyTe5Oi28vOUTitlkSjXH6"
+            val apiKey = Api.Apikey3
             val client = OkHttpClient()
             val locationKey = withContext(Dispatchers.IO) {
                 val locationUrl = "https://dataservice.accuweather.com/locations/v1/cities/search?apikey=$apiKey&q=$city"
@@ -75,7 +108,7 @@ class AppBarFragment : Fragment() {
                             if (jsonArray.length() > 0) {
                                 jsonArray.getJSONObject(0).getString("Key")
                             } else {
-                                null
+                             null
                             }
                         } else {
                             val jsonObject = JSONObject(responseData)
@@ -134,12 +167,22 @@ class AppBarFragment : Fragment() {
 
                 weatherData?.let { (weatherText, temperature) ->
                     println("Weather Text: $weatherText, Temperature: $temperature")
-                    binding.tvCityName.text = city
+                    binding.tvCityName.text = city.uppercase()
                     binding.tvTemperature.text = "$temperature°C"
                 }
+                val home = HomeFragment()
+                val hourly = HourlyFragment()
+                val daily = DailyFragment()
+                home.updateWeatherHome()
+                hourly.updateHourly()
+                daily.updateDaily()
+            }else{
+                binding.tvCityName.text= "API từ chối phản hồi"
+                binding.tvTemperature.text = " HEHEH"
             }
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

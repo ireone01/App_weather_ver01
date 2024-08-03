@@ -18,7 +18,8 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class HourlyFragment : Fragment(){
-    private lateinit var binding: HourFragmentBinding
+    private var _binding : HourFragmentBinding? = null
+    private  val binding get() = _binding!!
     private lateinit var mList: ArrayList<Data>
 
     override fun onCreateView(
@@ -27,7 +28,7 @@ class HourlyFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = HourFragmentBinding.inflate(inflater
+        _binding = HourFragmentBinding.inflate(inflater
             ,container
             ,false)
         return binding.root
@@ -38,30 +39,34 @@ class HourlyFragment : Fragment(){
 
         binding.mainRecyclerView.setHasFixedSize(true)
         binding.mainRecyclerView.layoutManager = LinearLayoutManager(context)
+
         mList = ArrayList()
-//        prepareData()
-//        val adapter = HourlyAdapter(mList)
-//        binding.mainRecyclerView.adapter =adapter
-             CoroutineScope(Dispatchers.Main).launch {
+        updateHourly()
+    }
+    fun updateHourly(){
+        CoroutineScope(Dispatchers.Main).launch {
             val hourlyfragment = async { fetchHourlyFragment(Api.apiForecastHour) }
+
+
+            if(::mList.isInitialized) {
+                mList.clear()
+            }else{
+                mList=ArrayList()
+            }
+
             hourlyfragment.await().let {
                 mList.add(Data.HourlyFragmentData(it))
             }
-            val adapter = HourlyAdapter(mList)
-            binding.mainRecyclerView.adapter = adapter
+            _binding?.let { binding ->
+                val adapter = HourlyAdapter(mList)
+                binding.mainRecyclerView.adapter = adapter
+            }
         }
     }
-    private fun prepareData(){
-        val hourly = ArrayList<HourlyFragmentItem>()
-        hourly.add(HourlyFragmentItem("2024-07-25T05:28:00+07:00","23","45","12","2024-07-25T05:28:00+07:00"))
-        hourly.add(HourlyFragmentItem("2024-07-25T05:28:00+07:00","23","45","12","2024-07-25T05:28:00+07:00"))
-        hourly.add(HourlyFragmentItem("2024-07-25T05:28:00+07:00","23","45","12","2024-07-25T05:28:00+07:00"))
-        hourly.add(HourlyFragmentItem("2024-07-25T05:28:00+07:00","23","45","12","2024-07-25T05:28:00+07:00"))
-        hourly.add(HourlyFragmentItem("2024-07-25T05:28:00+07:00","23","45","12","2024-07-25T05:28:00+07:00"))
-        hourly.add(HourlyFragmentItem("2024-07-25T05:28:00+07:00","23","45","12","2024-07-25T05:28:00+07:00"))
-        hourly.add(HourlyFragmentItem("2024-07-25T05:28:00+07:00","23","45","12","2024-07-25T05:28:00+07:00"))
-        hourly.add(HourlyFragmentItem("2024-07-25T05:28:00+07:00","23","45","12","2024-07-25T05:28:00+07:00"))
-        mList.add(Data.HourlyFragmentData(hourly))
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
+
 }

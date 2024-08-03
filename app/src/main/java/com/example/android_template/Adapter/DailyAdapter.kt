@@ -19,11 +19,20 @@ class DailyAdapter(private val weather : List<Data>) :
 
                 @RequiresApi(Build.VERSION_CODES.O)
                 fun bindDailyFragment(dailyList: List<DailyFragmentItem>) {
-                    binding.childRecyclerView.setHasFixedSize(true)
-                    binding.childRecyclerView.layoutManager = LinearLayoutManager(binding.root.context, RecyclerView.HORIZONTAL,false)
-                    val adapter = ChildAdapter(DataType.DAILY_FRAGMENT, DailyFragmentList = dailyList)
-                    binding.childRecyclerView.adapter =adapter
-                    binding.textA.text = "Tháng "+ extractDay(dailyList[0].day).substring(0,2)
+                    if(dailyList.isNotEmpty()) {
+                        binding.childRecyclerView.setHasFixedSize(true)
+                        binding.childRecyclerView.layoutManager = LinearLayoutManager(
+                            binding.root.context,
+                            RecyclerView.HORIZONTAL,
+                            false
+                        )
+                        val adapter =
+                            ChildAdapter(DataType.DAILY_FRAGMENT, DailyFragmentList = dailyList)
+                        binding.childRecyclerView.adapter = adapter
+                        binding.textA.text = "Tháng " + extractDay(dailyList[0].day).substring(0, 2)
+                    }else{
+                        binding.textA.text = "Không có dữ liệu nhận về từ API"
+                    }
                 }
             }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
