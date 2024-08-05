@@ -5,7 +5,23 @@
     android:layout_height="match_parent"
     android:padding="50dp">
 
+    <TextView
+        android:id="@+id/Tv_00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Today , 12 September"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/Csl_01"
+        android:layout_marginBottom="15dp"
+        />
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/Csl_01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -13,12 +29,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+
         <ImageView
             android:id="@+id/Img_01"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@drawable/sun"
-            app:tint="@color/white"
+
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -40,7 +57,7 @@
 
             android:text="C"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/sunMoonColor"
+
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="@id/Tv_01"
             app:layout_constraintStart_toEndOf="@id/Tv_01" />
@@ -51,18 +68,28 @@
             android:layout_height="wrap_content"
             android:text="ReelFeels 84*"
             android:textColor="@color/white"
+            android:textStyle="bold"
             android:textSize="25sp"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintTop_toBottomOf="@id/Tv_01"
             app:layout_constraintStart_toStartOf="@id/Img_01"
             app:layout_constraintEnd_toEndOf="@id/Tv_02" />
 
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/rain_drop"
+            app:layout_constraintEnd_toStartOf="@id/Tv_04"
+            app:tint = "@color/white"
+            app:layout_constraintTop_toBottomOf="@id/Tv_03"
+            />
         <TextView
             android:id="@+id/Tv_04"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="%Rain : "
             android:textColor="@color/white"
+            android:textStyle="bold"
             android:textSize="20sp"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintTop_toBottomOf="@id/Tv_03"

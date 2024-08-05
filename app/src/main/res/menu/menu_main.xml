@@ -8,10 +8,10 @@
         android:icon="@drawable/ic_search_black_24dp"
         android:title="Search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="always"/>
+        app:showAsAction="always"
+       />
     <item
         android:id="@+id/mi_new_size"
         android:title="Choose"
-
         app:showAsAction="never" />
 </menu>

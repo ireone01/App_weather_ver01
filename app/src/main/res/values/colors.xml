@@ -6,5 +6,7 @@
     <color name="backgrowColor">#1E3A5F</color>
     <color name="backgrowRcItem">#0D2538</color>
     <color name="sunMoonColor">#4AF7D9</color>
+    <color name="backgrow_01">#49a0f5</color>
+    <color name="backgrow_02">#7ebff4</color>
 
 </resources>

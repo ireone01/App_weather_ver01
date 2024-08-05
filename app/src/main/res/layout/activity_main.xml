@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/backgrowRcItem">
+    android:background="@color/backgrow_01">
 
     <fragment
         android:id="@+id/appBarFragment"
         android:layout_width="0dp"
-        android:name="com.example.android_template.Fragment.AppBarFragment"
+        android:name="com.example.android_template.Screen.Search.AppBarFragment"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

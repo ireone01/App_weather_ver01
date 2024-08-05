@@ -17,7 +17,7 @@
         android:layout_height="50dp"
         android:src="@drawable/sun"
         android:scaleType="fitXY"
-        app:tint="@color/sunMoonColor"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,7 +48,7 @@
         app:layout_constraintEnd_toStartOf="@id/linearLayout2"
         app:layout_constraintTop_toTopOf="@id/linearLayout2"
         app:layout_constraintBottom_toBottomOf="@id/linearLayout2"
-        android:background="@color/divider_color"
+
         android:layout_marginEnd="10dp"
        />
 
@@ -68,13 +68,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:layout_marginBottom="4dp" />
 
         <TextView
             android:id="@+id/mtv3moon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:text="2" />
     </LinearLayout>
     <View
@@ -85,6 +88,6 @@
         app:layout_constraintTop_toBottomOf="@+id/imgMoon"
         app:layout_constraintStart_toStartOf="@+id/imgMoon"
 
-        android:background="@color/divider_color" />
+        android:background="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

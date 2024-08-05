@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@id/text_label"
         app:layout_constraintStart_toStartOf="@id/text_label"
 
-        android:background="@color/divider_color" />
+        android:background="@color/white" />
 
 
 

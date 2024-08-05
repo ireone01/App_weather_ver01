@@ -1,4 +1,4 @@
-package com.example.android_template.Fragment
+package com.example.android_template.Screen.Home
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.example.android_template
+package com.example.android_template.Utils.Base
 
 import android.os.Build
 import androidx.annotation.RequiresApi

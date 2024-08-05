@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:background="@color/backgrowColor"
-    android:padding="5dp">
+    android:background="@color/backgrow_02"
+    >
 
     <Button
         android:id="@+id/btn_today"
@@ -12,6 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Hôm nay"
+        android:drawableTint = "@color/white"
+        android:background="@color/backgrow_02"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         android:drawableTop="@drawable/baseline_calendar_today_24"
         android:textSize="8sp"
 
@@ -24,6 +29,10 @@
         android:layout_weight="1"
         android:text="Theo giờ"
         android:drawableTop="@drawable/baseline_watch_later_24"
+        android:drawableTint = "@color/white"
+        android:background="@color/backgrow_02"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         android:textSize="8sp"
         android:layout_marginEnd="3dp"/>
 
@@ -33,7 +42,12 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Hằng ngày"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         android:drawableTop="@drawable/baseline_calendar_month_24"
+        android:drawableTint = "@color/white"
+        android:background="@color/backgrow_02"
+
         android:textSize="8sp"
         android:layout_marginEnd="3dp"/>
 
@@ -42,6 +56,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:drawableTint = "@color/white"
+        android:background="@color/backgrow_02"
         android:text="Ra-đa"
         android:drawableTop="@drawable/baseline_radar_24"
         android:textSize="8sp"/>

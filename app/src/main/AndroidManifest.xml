@@ -22,9 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Fragment.HourlyFragment"/>
-        <activity android:name=".Fragment.DailyFragment"/>
-        <activity android:name=".Fragment.RadaFragment"/>
+        <activity android:name=".Screen.Home.HourlyFragment"/>
+        <activity android:name=".Screen.Home.DailyFragment"/>
+        <activity android:name=".Screen.Home.RadaFragment"/>
 
     </application>
 

@@ -1,4 +1,4 @@
-package com.example.android_template.Fragment
+package com.example.android_template.Screen.Search
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.android_template.R
+import com.example.android_template.Screen.Home.DailyFragment
+import com.example.android_template.Screen.Home.HomeFragment
+import com.example.android_template.Screen.Home.HourlyFragment
+import com.example.android_template.Screen.Home.RadaFragment
 import com.example.android_template.databinding.FragmentNavigationBinding
 
 class NavigationFragment : Fragment() {
@@ -42,7 +46,7 @@ class NavigationFragment : Fragment() {
             .commit()
 
         parentFragmentManager.beginTransaction()
-            .replace(R.id.navigation,NavigationFragment())
+            .replace(R.id.navigation, NavigationFragment())
             .addToBackStack(null)
             .commit()
     }
