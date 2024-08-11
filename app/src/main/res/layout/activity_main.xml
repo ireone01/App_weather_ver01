@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/backgrow_01">
+    android:background="@drawable/background_color">
 
     <fragment
         android:id="@+id/appBarFragment"
@@ -26,6 +26,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+
+<!--    sửa thành fragment để không phải truyền lại theo trong NavigationFragment-->
     <FrameLayout
         android:id="@+id/navigation"
         android:layout_width="match_parent"

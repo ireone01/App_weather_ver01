@@ -1,6 +1,7 @@
 package com.example.android_template.Utils.Base
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -14,9 +15,10 @@ class calculateDuration {
             val format = DateTimeFormatter.ofPattern("HH:mm:ss")
             val start = LocalTime.parse(startTime, format)
             val end = LocalTime.parse(endTime, format)
-            if(SunorMoon =="Sun" || (SunorMoon=="Moon" && !start.isBefore(LocalTime.MIDNIGHT))) {
+            if(SunorMoon =="Sun" || (SunorMoon=="Moon" && start.isBefore(end))) {
                 val hour = ChronoUnit.HOURS.between(start, end)
                 val minut = ChronoUnit.MINUTES.between(start, end) % 60
+                Log.i("SunorMoon 01", "${hour}h : ${minut}m")
                 return "${hour}h : ${minut}m"
             }else{
                 var hour =24+ ChronoUnit.HOURS.between(start,LocalTime.MIDNIGHT)
@@ -27,8 +29,10 @@ class calculateDuration {
                 if((minut % 60).toFloat() != 0.toFloat()){
                     hour--
                 }
+
                 val totalHour = hour+hour1
                 val totalMinut = (minut+minut1)%60
+                Log.i("SunorMoon","${totalHour}h : ${totalMinut}m")
                 return "${totalHour}h : ${totalMinut}m"
 
             }

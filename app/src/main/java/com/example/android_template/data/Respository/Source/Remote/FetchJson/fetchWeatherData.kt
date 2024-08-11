@@ -37,18 +37,14 @@ suspend fun fetchWeatherData(apiUrl: String): List<CurrentCondition> = withConte
                                                 currentConditionJson.getAsJsonObject("Temperature")
                                                         .getAsJsonObject("Metric")
                                                         .get("Value").asString,
-                                                "°" + currentConditionJson.getAsJsonObject("Temperature")
-                                                        .getAsJsonObject("Metric")
-                                                        .get("Unit").asString
+                                                "°C"
                                         ),
                                         CurrentCondition(
                                                 "Nhiệt độ cảm nhận",
                                                 currentConditionJson.getAsJsonObject("RealFeelTemperature")
                                                         .getAsJsonObject("Metric")
                                                         .get("Value").asString,
-                                                "°" + currentConditionJson.getAsJsonObject("RealFeelTemperature")
-                                                        .getAsJsonObject("Metric")
-                                                        .get("Unit").asString
+                                                "°C"
                                         ),
                                         CurrentCondition(
                                                 "Tốc độ gió",
@@ -56,10 +52,7 @@ suspend fun fetchWeatherData(apiUrl: String): List<CurrentCondition> = withConte
                                                         .getAsJsonObject("Speed")
                                                         .getAsJsonObject("Metric")
                                                         .get("Value").asString,
-                                                " " + currentConditionJson.getAsJsonObject("Wind")
-                                                        .getAsJsonObject("Speed")
-                                                        .getAsJsonObject("Metric")
-                                                        .get("Unit").asString
+                                                " km/h"
                                         ),
                                         CurrentCondition(
                                                 "Tốc độ gió lớn nhất",
@@ -67,10 +60,7 @@ suspend fun fetchWeatherData(apiUrl: String): List<CurrentCondition> = withConte
                                                         .getAsJsonObject("Speed")
                                                         .getAsJsonObject("Metric")
                                                         .get("Value").asString,
-                                                " " + currentConditionJson.getAsJsonObject("WindGust")
-                                                        .getAsJsonObject("Speed")
-                                                        .getAsJsonObject("Metric")
-                                                        .get("Unit").asString
+                                                " km/h"
                                         ),
                                         CurrentCondition(
                                                 "Độ ẩm",

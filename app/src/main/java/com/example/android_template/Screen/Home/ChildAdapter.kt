@@ -50,19 +50,19 @@ class ChildAdapter(private val ViewType : Int
             RecyclerView.ViewHolder(binding.root){
                 @RequiresApi(Build.VERSION_CODES.O)
                 fun bindSunMoon(SunMoonItem : SunMoon){
-                    val rise = calculateDuration.extractTime(SunMoonItem.Rise)
-                    val set = calculateDuration.extractTime(SunMoonItem.Set)
+                    val rise = extractTime(SunMoonItem.Rise)
+                    val set = extractTime(SunMoonItem.Set)
                     if(SunMoonItem.Sun_or_Moon == "Sun"){
                         binding.imgMoon.setImageResource(R.drawable.sun)
 
                         binding.tvmoon.text = calculateHour("Sun",rise,set)
-                        binding.mtv2moon.text = "Mọc : $rise"
-                        binding.mtv3moon.text = "Lặn : $set"
+                        binding.mtv2moon.text = "Mọc : ${rise.substring(0,5)}"
+                        binding.mtv3moon.text = "Lặn : ${set.substring(0,5)}"
                     }else{
                         binding.imgMoon.setImageResource(R.drawable.moon)
                         binding.tvmoon.text = calculateHour("Moon",rise,set)
-                        binding.mtv2moon.text = "Mọc : $rise"
-                        binding.mtv3moon.text = "Lặn : $set"
+                        binding.mtv2moon.text = "Mọc : ${rise.substring(0,5)}"
+                        binding.mtv3moon.text = "Lặn :${set.substring(0,5)}"
                     }
 
 
