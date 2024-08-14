@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android_template.Api.Api
+import com.example.android_template.AppDatabase
+import com.example.android_template.Hourly_FragmentItem
+import com.example.android_template.NetworkUtils.isInternetAvailable
 import com.example.android_template.data.Model.CurrentCondition
 import com.example.android_template.data.Model.Data
 import com.example.android_template.data.Model.ForecastDay
@@ -28,7 +31,7 @@ class HomeFragment : Fragment() {
     private var _binding: HomeFragmentBinding? = null
     private  val binding get() = _binding!!
     private lateinit var mList: ArrayList<Data>
-
+    private lateinit var db: AppDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,111 +44,97 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        db = AppDatabase.getDatabase(requireContext())
         binding.mainRecyclerView.setHasFixedSize(true)
         binding.mainRecyclerView.layoutManager = LinearLayoutManager(context)
 
 
         mList = ArrayList()
-        prepareData()
-        val adapter = HomeAdapter(mList)
-        binding.mainRecyclerView.adapter = adapter
-//        Api.onLocationKeyUpdated = {
-//            updateWeatherHome()
-//        }
-//        updateWeatherHome()
-//    }
-//    fun updateWeatherHome() {
-//        Log.d("HomeFragment_TT", "updateWeatherHome called")
-//        CoroutineScope(Dispatchers.Main).launch {
-//            val currentCondition =async { fetchWeatherData(Api.apiUrl) }
-//            val sunMoon  = async { fetSunMoon(Api.apiSunMoon) }
-//            val forecastHour = async { fetchForecastHour(Api.apiForecastHour) }
-//            val forecastDay = async { fetchForecastDay(Api.apiForecastDay) }
-//            val temp  = async { fetchHourlyFragment(Api.apiForecastHour) }
-//
-//            if(::mList.isInitialized) {
-//                mList.clear()
-//            }else{
-//                mList=ArrayList()
-//            }
-//
-//            temp.await().let {
-//                mList.add(com.example.android_template.data.Model.Data.HourlyFragmentData(it))
-//            }
-//            currentCondition.await().let {
-//                mList.add(com.example.android_template.data.Model.Data.CurrentConditionData(it))
-//            }
-//            sunMoon.await().let {
-//                mList.add(com.example.android_template.data.Model.Data.SunMoonData(it))
-//            }
-//            forecastHour.await().let {
-//                mList.add(com.example.android_template.data.Model.Data.ForecastHourData(it))
-//            }
-//            forecastDay.await().let {
-//                mList.add(com.example.android_template.data.Model.Data.ForecastDayData(it))
-//            }
-//            _binding?.let { binding ->
-//                val adapter = HomeAdapter(mList)
-//                binding.mainRecyclerView.adapter = adapter
-//            }
-//        }
-//    }
-    }
-    private fun prepareData() {
-        val currentcondition = ArrayList<CurrentCondition>()
-        val sunmoon = ArrayList<SunMoon>()
-        val forecasthour = ArrayList<ForecastHour>()
-        val forecastday = ArrayList<ForecastDay>()
-
-        currentcondition.add(CurrentCondition("Temperature", "28.9", "C"))
-        currentcondition.add(CurrentCondition("RealFeel", "33.6", "C"))
-        currentcondition.add(CurrentCondition("Wind", "12.8", "km/h"))
-        currentcondition.add(CurrentCondition("Wind Gust", "21.4", "km/h"))
-        currentcondition.add(CurrentCondition("Humidity", "80", "%"))
-        currentcondition.add(CurrentCondition("Indoor Humidity", "80", "%"))
-
-
-        sunmoon.add(SunMoon("Sun", "2024-07-25T05:28:00+07:00", "2024-07-25T18:39:00+07:00"))
-        sunmoon.add(SunMoon("moon", "2024-07-25T21:45:00+07:00", "2024-07-26T10:11:00+07:00"))
-        sunmoon.add(SunMoon("Sun", "2024-07-25T05:28:00+07:00", "2024-07-25T18:39:00+07:00"))
-        sunmoon.add(SunMoon("moon", "2024-07-25T21:45:00+07:00", "2024-07-26T10:11:00+07:00"))
-
-        sunmoon.add(SunMoon("Sun", "2024-07-25T05:28:00+07:00", "2024-07-25T18:39:00+07:00"))
-        sunmoon.add(SunMoon("moon", "2024-07-25T21:45:00+07:00", "2024-07-26T10:11:00+07:00"))
-
-        sunmoon.add(SunMoon("Sun", "2024-07-25T05:28:00+07:00", "2024-07-25T18:39:00+07:00"))
-        sunmoon.add(SunMoon("moon", "2024-07-25T21:45:00+07:00", "2024-07-26T10:11:00+07:00"))
-
-        sunmoon.add(SunMoon("Sun", "2024-07-25T05:28:00+07:00", "2024-07-25T18:39:00+07:00"))
-        sunmoon.add(SunMoon("moon", "2024-07-25T21:45:00+07:00", "2024-07-26T10:11:00+07:00"))
-
-        sunmoon.add(SunMoon("Sun", "2024-07-25T05:28:00+07:00", "2024-07-25T18:39:00+07:00"))
-        sunmoon.add(SunMoon("moon", "2024-07-25T21:45:00+07:00", "2024-07-26T10:11:00+07:00"))
-
-
-        forecasthour.add(ForecastHour("2024-07-25T21:45:00+07:00","23","12"))
-        forecasthour.add(ForecastHour("2024-07-25T21:45:00+07:00","23","45"))
-        forecasthour.add(ForecastHour("2024-07-25T21:45:00+07:00","23","45"))
-        forecasthour.add(ForecastHour("2024-07-25T21:45:00+07:00","23","56"))
-        forecasthour.add(ForecastHour("2024-07-25T21:45:00+07:00","23","56"))
-        forecasthour.add(ForecastHour("2024-07-25T21:45:00+07:00","23","12"))
-
-
-        forecastday.add(ForecastDay("2024-07-25T05:28:00+07:00","23","45","12"))
-        forecastday.add(ForecastDay("2024-07-25T05:28:00+07:00","23","45","43"))
-        forecastday.add(ForecastDay("2024-07-25T05:28:00+07:00","23","45","56"))
-        forecastday.add(ForecastDay("2024-07-25T05:28:00+07:00","23","45","56"))
-        forecastday.add(ForecastDay("2024-07-25T05:28:00+07:00","23","45","12"))
-        forecastday.add(ForecastDay("2024-07-25T05:28:00+07:00","23","45","34"))
-        mList.add(Data.CurrentConditionData(currentcondition))
-        mList.add(Data.SunMoonData(sunmoon))
-        mList.add(Data.ForecastHourData(forecasthour))
-        mList.add(Data.ForecastDayData(forecastday))
-    }
-
-        override fun onDestroyView() {
-            super.onDestroyView()
-            _binding = null
+        Api.onLocationKeyUpdated = {
+            updateWeatherHome()
         }
-}
+        updateWeatherHome()
+    }
+    fun updateWeatherHome() {
+        Log.d("HomeFragment_TT", "updateWeatherHome called")
+        CoroutineScope(Dispatchers.Main).launch {
+            if(isInternetAvailable(requireContext())){
+            val currentCondition =async { fetchWeatherData(Api.apiUrl) }
+            val sunMoon  = async { fetSunMoon(Api.apiSunMoon) }
+            val forecastHour = async { fetchForecastHour(Api.apiForecastHour) }
+            val forecastDay = async { fetchForecastDay(Api.apiForecastDay) }
+            val temp  = async { fetchHourlyFragment(Api.apiForecastHour) }
+            val temp_result = temp.await()
+            val curren_result = currentCondition.await()
+            val sunmoon_result = sunMoon.await()
+            val forehour_result = forecastHour.await()
+            val foreday_result =  forecastDay.await()
+            if(temp_result.isNotEmpty() && curren_result.isNotEmpty() && sunmoon_result.isNotEmpty()
+                && foreday_result.isNotEmpty() && forehour_result.isNotEmpty()){
+                db.hourlyfragmentDAO().clearAll()
+                db.hourlyfragmentDAO().insterAll(temp_result)
+                val hourly = db.hourlyfragmentDAO().getAllConditions()
+
+                db.currentDAO().clearAll()
+                db.currentDAO().insertAll(curren_result)
+                val curren  = db.currentDAO().getAllConditions()
+
+                db.sunmoonDAO().clearAll()
+                db.sunmoonDAO().insterAll(sunmoon_result)
+                val sunmon = db.sunmoonDAO().getAllConditions()
+
+                db.forecasthourDAO().clearAll()
+                db.forecasthourDAO().insterAll(forehour_result)
+                val forehour = db.forecasthourDAO().getAllConditions()
+
+                db.forecastdayDAO().clearAll()
+                db.forecastdayDAO().insterAll(foreday_result)
+                val foreday = db.forecastdayDAO().getAllConditions()
+
+                mList.clear()
+                mList.add(Data.HourlyFragmentData(hourly))
+                mList.add(Data.CurrentConditionData(curren))
+                mList.add(Data.SunMoonData(sunmon))
+                mList.add(Data.ForecastHourData(forehour))
+                mList.add(Data.ForecastDayData(foreday))
+
+            }else{
+                val hourly = db.hourlyfragmentDAO().getAllConditions()
+                val curren  = db.currentDAO().getAllConditions()
+                val sunmon = db.sunmoonDAO().getAllConditions()
+                val forehour = db.forecasthourDAO().getAllConditions()
+                val foreday = db.forecastdayDAO().getAllConditions()
+                mList.add(Data.HourlyFragmentData(hourly))
+                mList.add(Data.CurrentConditionData(curren))
+                mList.add(Data.SunMoonData(sunmon))
+                mList.add(Data.ForecastHourData(forehour))
+                mList.add(Data.ForecastDayData(foreday))
+            }
+
+            }else{
+                val hourly = db.hourlyfragmentDAO().getAllConditions()
+                val curren  = db.currentDAO().getAllConditions()
+                val sunmon = db.sunmoonDAO().getAllConditions()
+                val forehour = db.forecasthourDAO().getAllConditions()
+                val foreday = db.forecastdayDAO().getAllConditions()
+                mList.add(Data.HourlyFragmentData(hourly))
+                mList.add(Data.CurrentConditionData(curren))
+                mList.add(Data.SunMoonData(sunmon))
+                mList.add(Data.ForecastHourData(forehour))
+                mList.add(Data.ForecastDayData(foreday))
+            }
+            _binding?.let { binding ->
+                val adapter = HomeAdapter(mList)
+                binding.mainRecyclerView.adapter = adapter
+            }
+        }
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+    }
+
+
+
+

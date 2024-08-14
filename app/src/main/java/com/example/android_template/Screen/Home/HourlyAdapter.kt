@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android_template.Hourly_FragmentItem
 import com.example.android_template.data.Model.Data
 import com.example.android_template.data.Model.DataType
-import com.example.android_template.data.Model.HourlyFragmentItem
 import com.example.android_template.Utils.Base.calculateDuration.Companion.extractDay
 import com.example.android_template.databinding.ACurrentConditionBinding
 
@@ -18,7 +18,7 @@ class HourlyAdapter(private val weather : List<Data>):
                     RecyclerView.ViewHolder(binding.root){
 
                         @RequiresApi(Build.VERSION_CODES.O)
-                        fun bindHourlyFragment(hourlyList : List<HourlyFragmentItem>){
+                        fun bindHourlyFragment(hourlyList : List<Hourly_FragmentItem>){
                             if (hourlyList.isNotEmpty()) {
                                 binding.childRecyclerView.setHasFixedSize(true)
                                 binding.childRecyclerView.layoutManager = LinearLayoutManager(binding.root.context, RecyclerView.VERTICAL, false)

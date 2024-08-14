@@ -38,7 +38,7 @@ class AppBarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fetchData("Hà Nội")
+//        fetchData("Hà Nội")
 
         (activity as? AppCompatActivity)?.setSupportActionBar(binding.toolbar)
         setHasOptionsMenu(true)
@@ -165,6 +165,7 @@ class AppBarFragment : Fragment() {
                 binding.tvCityName.text= "API từ chối phản hồi"
                 binding.tvTemperature.text = " HEHEH"
             }
+
         }
     }
 

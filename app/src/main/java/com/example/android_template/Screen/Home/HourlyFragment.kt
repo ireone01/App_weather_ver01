@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android_template.Api.Api
+import com.example.android_template.AppDatabase
+
+import com.example.android_template.NetworkUtils.isInternetAvailable
 import com.example.android_template.data.Model.Data
 import com.example.android_template.databinding.HourFragmentBinding
 import com.example.android_template.data.Respository.Source.Remote.FetchJson.fetchHourlyFragment
@@ -19,6 +22,7 @@ class HourlyFragment : Fragment(){
     private var _binding : HourFragmentBinding? = null
     private  val binding get() = _binding!!
     private lateinit var mList: ArrayList<Data>
+    private lateinit var db: AppDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +39,8 @@ class HourlyFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        db = AppDatabase.getDatabase(requireContext())
         binding.mainRecyclerView.setHasFixedSize(true)
         binding.mainRecyclerView.layoutManager = LinearLayoutManager(context)
 
@@ -43,17 +49,24 @@ class HourlyFragment : Fragment(){
     }
     fun updateHourly(){
         CoroutineScope(Dispatchers.Main).launch {
+            if(isInternetAvailable(requireContext())){
             val hourlyfragment = async { fetchHourlyFragment(Api.apiForecastHour) }
+            val result = hourlyfragment.await()
 
-
-            if(::mList.isInitialized) {
+            if(result.isNotEmpty()){
+                db.hourlyfragmentDAO().clearAll()
+                db.hourlyfragmentDAO().insterAll(result)
+                val cachedData = db.hourlyfragmentDAO().getAllConditions()
                 mList.clear()
+                mList.add(Data.HourlyFragmentData(cachedData))
             }else{
-                mList=ArrayList()
+                val cachedData = db.hourlyfragmentDAO().getAllConditions()
+                mList.add(Data.HourlyFragmentData(cachedData))
             }
 
-            hourlyfragment.await().let {
-                mList.add(com.example.android_template.data.Model.Data.HourlyFragmentData(it))
+                }else{
+                val cachedData = db.hourlyfragmentDAO().getAllConditions()
+                mList.add(Data.HourlyFragmentData(cachedData))
             }
             _binding?.let { binding ->
                 val adapter = HourlyAdapter(mList)

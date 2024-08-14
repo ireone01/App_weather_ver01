@@ -5,20 +5,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android_template.data.Model.CurrentCondition
-import com.example.android_template.data.Model.DailyFragmentItem
+import com.example.android_template.Current_Condition
+import com.example.android_template.Daily_FragmentItem
+import com.example.android_template.Forecast_Day
+import com.example.android_template.Forecast_Hour
+import com.example.android_template.Hourly_FragmentItem
 import com.example.android_template.data.Model.DataType
-import com.example.android_template.data.Model.ForecastDay
-import com.example.android_template.data.Model.ForecastHour
-import com.example.android_template.data.Model.HourlyFragmentItem
-import com.example.android_template.data.Model.SunMoon
 import com.example.android_template.R
-import com.example.android_template.Utils.Base.calculateDuration
+import com.example.android_template.Sun_Moon
 import com.example.android_template.Utils.Base.calculateDuration.Companion.calculateHour
 import com.example.android_template.Utils.Base.calculateDuration.Companion.extractDay
 import com.example.android_template.Utils.Base.calculateDuration.Companion.extractTime
 import com.example.android_template.Utils.Base.calculateDuration.Companion.fahrenheitToCelsius
-
 import com.example.android_template.databinding.CurrentConditionBinding
 import com.example.android_template.databinding.DailyFragmentItemBinding
 import com.example.android_template.databinding.ForecastDayBinding
@@ -28,19 +26,19 @@ import com.example.android_template.databinding.SunMoonBinding
 import com.example.android_template.databinding.TempBinding
 
 class ChildAdapter(private val ViewType : Int
-                   , private val CurrentConditionList : List<CurrentCondition> = listOf()
-                   , private val SunMoonList : List<SunMoon> = listOf()
-                   , private val ForecastHourList : List<ForecastHour> = listOf()
-                   , private val ForecastDayList : List<ForecastDay> = listOf()
-                    , private val HourlyFragmentList : List<HourlyFragmentItem> = listOf()
-                    , private val DailyFragmentList : List<DailyFragmentItem> = listOf()
+                   , private val CurrentConditionList : List<Current_Condition> = listOf()
+                   , private val SunMoonList : List<Sun_Moon> = listOf()
+                   , private val ForecastHourList : List<Forecast_Hour> = listOf()
+                   , private val ForecastDayList : List<Forecast_Day> = listOf()
+                    , private val HourlyFragmentList : List<Hourly_FragmentItem> = listOf()
+                    , private val DailyFragmentList : List<Daily_FragmentItem> = listOf()
 )
     : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
 
     inner class CurrentConditionHolder(private val binding: CurrentConditionBinding):
             RecyclerView.ViewHolder(binding.root){
-                fun bindCurrentCondition(CurrentItem: CurrentCondition){
+                fun bindCurrentCondition(CurrentItem: Current_Condition){
                   binding.textLabel.text = CurrentItem.Label
                     binding.textValue.text = CurrentItem.Value
                     binding.textUnit.text = CurrentItem.Unit
@@ -49,7 +47,7 @@ class ChildAdapter(private val ViewType : Int
     inner class SunMoonHolder(private val binding: SunMoonBinding):
             RecyclerView.ViewHolder(binding.root){
                 @RequiresApi(Build.VERSION_CODES.O)
-                fun bindSunMoon(SunMoonItem : SunMoon){
+                fun bindSunMoon(SunMoonItem : Sun_Moon){
                     val rise = extractTime(SunMoonItem.Rise)
                     val set = extractTime(SunMoonItem.Set)
                     if(SunMoonItem.Sun_or_Moon == "Sun"){
@@ -71,7 +69,7 @@ class ChildAdapter(private val ViewType : Int
     inner class ForecastHourHolder(private val binding: ForecastHourBinding):
             RecyclerView.ViewHolder(binding.root){
                 @RequiresApi(Build.VERSION_CODES.O)
-                fun bindForecastHour(ForeHourItem: ForecastHour){
+                fun bindForecastHour(ForeHourItem: Forecast_Hour){
 
                     when{
                         ForeHourItem.forecast_rain.toInt() <30 -> {
@@ -103,7 +101,7 @@ class ChildAdapter(private val ViewType : Int
     inner class ForecastDayHolder(private val binding : ForecastDayBinding):
             RecyclerView.ViewHolder(binding.root){
                 @RequiresApi(Build.VERSION_CODES.O)
-                fun binForecastDay(ForeDayItem : ForecastDay){
+                fun binForecastDay(ForeDayItem : Forecast_Day){
 
                     when{
                         ForeDayItem.rain.toInt() < 30 ->{
@@ -134,7 +132,7 @@ class ChildAdapter(private val ViewType : Int
     inner class HourlyFragmentItemHolder(private val binding : HourFragmentItemBinding):
         RecyclerView.ViewHolder(binding.root){
         @RequiresApi(Build.VERSION_CODES.O)
-        fun bindHourlyFragmentItem(HourlyFragItem : HourlyFragmentItem){
+        fun bindHourlyFragmentItem(HourlyFragItem : Hourly_FragmentItem){
             when{
                 HourlyFragItem.rain.toInt() < 30 ->{
                     binding.imgDay.setImageResource(R.drawable.sun)
@@ -164,7 +162,7 @@ class ChildAdapter(private val ViewType : Int
     inner class TempHolder(private val binding : TempBinding):
             RecyclerView.ViewHolder(binding.root){
                 @RequiresApi(Build.VERSION_CODES.O)
-                fun bindTemp(temp : HourlyFragmentItem){
+                fun bindTemp(temp : Hourly_FragmentItem){
                     when{
                         temp.rain.toInt() < 30 ->{
                             binding.Img01.setImageResource(R.drawable.sun)
@@ -193,7 +191,7 @@ class ChildAdapter(private val ViewType : Int
     inner class DailyFragmentItemHolder(private val binding : DailyFragmentItemBinding):
         RecyclerView.ViewHolder(binding.root){
         @RequiresApi(Build.VERSION_CODES.O)
-        fun bindDailyFragmentItem(DailyItem : DailyFragmentItem){
+        fun bindDailyFragmentItem(DailyItem : Daily_FragmentItem){
             var maxpar = 300
             var t_par =15
             when{

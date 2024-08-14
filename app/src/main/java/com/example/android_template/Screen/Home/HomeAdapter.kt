@@ -5,14 +5,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android_template.Current_Condition
+import com.example.android_template.Forecast_Day
+import com.example.android_template.Forecast_Hour
+import com.example.android_template.Hourly_FragmentItem
 import com.example.android_template.data.Model.CurrentCondition
 import com.example.android_template.data.Model.Data
 import com.example.android_template.data.Model.DataType
 import com.example.android_template.data.Model.ForecastDay
 import com.example.android_template.data.Model.ForecastHour
-import com.example.android_template.data.Model.HourlyFragmentItem
 import com.example.android_template.data.Model.SunMoon
 import com.example.android_template.R
+import com.example.android_template.Sun_Moon
 import com.example.android_template.databinding.ACurrentConditionBinding
 
 
@@ -21,7 +25,7 @@ RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     inner class ACurrentConditionHolder(private val binding : ACurrentConditionBinding):
             RecyclerView.ViewHolder(binding.root){
 
-                fun bindCurrentCondition(recyclerList : List<CurrentCondition>){
+                fun bindCurrentCondition(recyclerList : List<Current_Condition>){
                     binding.childRecyclerView.setHasFixedSize(true)
                     binding.childRecyclerView.layoutManager= LinearLayoutManager(binding.root.context,RecyclerView.VERTICAL,false)
                     val adapter = ChildAdapter(DataType.CURRENT_CONDITION, CurrentConditionList = recyclerList)
@@ -29,28 +33,28 @@ RecyclerView.Adapter<RecyclerView.ViewHolder>(){
                     binding.textA.text="Điều Kiện Hiện Tại"
 
                 }
-                fun bindSunMoon(sunmoonlist : List<SunMoon>){
+                fun bindSunMoon(sunmoonlist : List<Sun_Moon>){
                     binding.childRecyclerView.setHasFixedSize(true)
                     binding.childRecyclerView.layoutManager = LinearLayoutManager(binding.root.context, RecyclerView.VERTICAL,false)
                     val adapter  = ChildAdapter(DataType.SUN_MOON_TYPE, SunMoonList = sunmoonlist)
                     binding.childRecyclerView.adapter =adapter
                     binding.textA.text="Mặt Trời & Mặt Trăng"
                 }
-                fun bindForecastHour(forecasthourList : List<ForecastHour>){
+                fun bindForecastHour(forecasthourList : List<Forecast_Hour>){
                     binding.childRecyclerView.setHasFixedSize(true)
                     binding.childRecyclerView.layoutManager = LinearLayoutManager(binding.root.context,RecyclerView.HORIZONTAL,false)
                     val adapter = ChildAdapter(DataType.FORECAST_HOUR, ForecastHourList = forecasthourList)
                     binding.childRecyclerView.adapter = adapter
                     binding.textA.text = "Theo Giờ"
                 }
-                fun bindForecastDay(forecastDayList: List<ForecastDay>){
+                fun bindForecastDay(forecastDayList: List<Forecast_Day>){
                     binding.childRecyclerView.setHasFixedSize(true)
                     binding.childRecyclerView.layoutManager = LinearLayoutManager(binding.root.context,RecyclerView.VERTICAL,false)
                     val adapter = ChildAdapter(DataType.FORECAST_DAY, ForecastDayList = forecastDayList)
                     binding.childRecyclerView.adapter = adapter
                     binding.textA.text = "Theo Ngày"
                 }
-                fun bindTemp(tempList : List<HourlyFragmentItem>){
+                fun bindTemp(tempList : List<Hourly_FragmentItem>){
                     binding.childRecyclerView.setHasFixedSize(true)
                     binding.childRecyclerView.layoutManager = LinearLayoutManager(binding.root.context,RecyclerView.VERTICAL,false)
                     val adapter = ChildAdapter(DataType.TEMP , HourlyFragmentList = tempList)
