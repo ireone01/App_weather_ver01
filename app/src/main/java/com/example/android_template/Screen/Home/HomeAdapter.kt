@@ -9,12 +9,10 @@ import com.example.android_template.Current_Condition
 import com.example.android_template.Forecast_Day
 import com.example.android_template.Forecast_Hour
 import com.example.android_template.Hourly_FragmentItem
-import com.example.android_template.data.Model.CurrentCondition
+
 import com.example.android_template.data.Model.Data
 import com.example.android_template.data.Model.DataType
-import com.example.android_template.data.Model.ForecastDay
-import com.example.android_template.data.Model.ForecastHour
-import com.example.android_template.data.Model.SunMoon
+
 import com.example.android_template.R
 import com.example.android_template.Sun_Moon
 import com.example.android_template.databinding.ACurrentConditionBinding
