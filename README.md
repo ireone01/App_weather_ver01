@@ -5,16 +5,16 @@ WeatherApp là một ứng dụng đơn giản giúp người dùng tra cứu th
 ## Ảnh màn hình
 Dưới đây là một số hình ảnh màn hình của ứng dụng:
 
-![Màn hình chính](https://github.com/user-attachments/assets/cf699c18-7ae2-444d-b27e-43e25fddea06)
-![](https://github.com/user-attachments/assets/ad24a212-2dc5-4188-883f-313bee080596)
+![Màn hình chính](ScreenShot%2FHomeScreen.png)
+![](ScreenShot%2FHomeScreen01.png)
 
 
 *Màn hình chính hiển thị thông tin thời tiết hiện tại.*
 
 
 
-![Màn hình phụ](https://github.com/user-attachments/assets/bc17296b-e816-48cf-be87-ed5bb66d74c9)
-![](https://github.com/user-attachments/assets/713ebd99-b789-415d-b35b-bbe1f9776a4f)
+![Màn hình phụ](ScreenShot%2FDetailScreen.png)
+![](ScreenShot%2FDetailScreen02.png)
 
 *Màn hình phụ hiển thị thời tiết trong các giờ trong ngày và các ngày tới*
 ## Tính năng
