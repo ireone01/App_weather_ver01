@@ -1,16 +1,13 @@
-package com.example.android_template.data.Respository.Source.Remote.FetchJson
+package com.example.Android_weather_app.data.Respository.Source.Remote.FetchJson
 
-import com.example.android_template.Current_Condition
-import com.example.android_template.Daily_FragmentItem
-import com.example.android_template.Forecast_Day
-import com.example.android_template.Forecast_Hour
-import com.example.android_template.Hourly_FragmentItem
-import com.example.android_template.Sun_Moon
-import com.example.android_template.data.Model.CurrentCondition
-import com.example.android_template.data.Model.DailyFragmentItem
-import com.example.android_template.data.Model.ForecastDay
-import com.example.android_template.data.Model.ForecastHour
-import com.example.android_template.data.Model.SunMoon
+import com.example.Android_weather_app.Api.Api
+import com.example.Android_weather_app.Current_Condition
+import com.example.Android_weather_app.Daily_FragmentItem
+import com.example.Android_weather_app.Forecast_Day
+import com.example.Android_weather_app.Forecast_Hour
+import com.example.Android_weather_app.Hourly_FragmentItem
+import com.example.Android_weather_app.Sun_Moon
+
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import com.google.gson.Gson
@@ -197,6 +194,7 @@ suspend fun fetchHourlyFragment(apiUrl: String): List<Hourly_FragmentItem> = wit
                                         val pre = jsonObject.get("PrecipitationProbability").asString
                                          hourlyList.add(
                                                 Hourly_FragmentItem(
+                                                        city = Api.locationName,
                                                         hour = dateTime,
                                                         tem = tem,
                                                         rel_tem = tem_rel,

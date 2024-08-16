@@ -1,11 +1,11 @@
-package com.example.android_template.data.Model
+package com.example.Android_weather_app.data.Model
 
-import com.example.android_template.Current_Condition
-import com.example.android_template.Daily_FragmentItem
-import com.example.android_template.Forecast_Day
-import com.example.android_template.Forecast_Hour
-import com.example.android_template.Hourly_FragmentItem
-import com.example.android_template.Sun_Moon
+import com.example.Android_weather_app.Current_Condition
+import com.example.Android_weather_app.Daily_FragmentItem
+import com.example.Android_weather_app.Forecast_Day
+import com.example.Android_weather_app.Forecast_Hour
+import com.example.Android_weather_app.Hourly_FragmentItem
+import com.example.Android_weather_app.Sun_Moon
 
 
 sealed class Data {
@@ -16,40 +16,3 @@ sealed class Data {
     data class HourlyFragmentData(val hourlyFragmentList : List<Hourly_FragmentItem>) : Data()
     data class DailyFragmentData(val dailyFragmentList : List<Daily_FragmentItem>) : Data()
 }
-data class CurrentCondition(
-    val Label: String,
-    val Value: String,
-    val Unit: String
-)
-
-data class SunMoon(
-    val Sun_or_Moon : String,
-    val Rise: String,
-    val Set: String,
-
-)
-data class ForecastHour(
-    val forecast_time : String,
-    val forecast_tem : String ,
-    val forecast_rain : String
-)
-
-data class ForecastDay(
-    val day : String,
-    val tem_min : String ,
-    val tem_max : String ,
-    val rain : String
-)
-//data class HourlyFragmentItem(
-//    val hour : String,
-//    val tem : String ,
-//    val rel_tem : String ,
-//    val rain : String,
-//    val day : String
-//)
-data class DailyFragmentItem(
-    val day : String,
-    val tem_min : String ,
-    val tem_max : String ,
-    val rain : String
-)

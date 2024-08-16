@@ -1,29 +1,29 @@
-package com.example.android_template.Screen.Home
+package com.example.Android_weather_app.Screen.Home
 
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android_template.Current_Condition
-import com.example.android_template.Daily_FragmentItem
-import com.example.android_template.Forecast_Day
-import com.example.android_template.Forecast_Hour
-import com.example.android_template.Hourly_FragmentItem
-import com.example.android_template.data.Model.DataType
-import com.example.android_template.R
-import com.example.android_template.Sun_Moon
-import com.example.android_template.Utils.Base.calculateDuration.Companion.calculateHour
-import com.example.android_template.Utils.Base.calculateDuration.Companion.extractDay
-import com.example.android_template.Utils.Base.calculateDuration.Companion.extractTime
-import com.example.android_template.Utils.Base.calculateDuration.Companion.fahrenheitToCelsius
-import com.example.android_template.databinding.CurrentConditionBinding
-import com.example.android_template.databinding.DailyFragmentItemBinding
-import com.example.android_template.databinding.ForecastDayBinding
-import com.example.android_template.databinding.ForecastHourBinding
-import com.example.android_template.databinding.HourFragmentItemBinding
-import com.example.android_template.databinding.SunMoonBinding
-import com.example.android_template.databinding.TempBinding
+import com.example.Android_weather_app.Current_Condition
+import com.example.Android_weather_app.Daily_FragmentItem
+import com.example.Android_weather_app.Forecast_Day
+import com.example.Android_weather_app.Forecast_Hour
+import com.example.Android_weather_app.Hourly_FragmentItem
+import com.example.Android_weather_app.data.Model.DataType
+import com.example.Android_weather_app.R
+import com.example.Android_weather_app.Sun_Moon
+import com.example.Android_weather_app.Utils.Base.calculateDuration.Companion.calculateHour
+import com.example.Android_weather_app.Utils.Base.calculateDuration.Companion.extractDay
+import com.example.Android_weather_app.Utils.Base.calculateDuration.Companion.extractTime
+import com.example.Android_weather_app.Utils.Base.calculateDuration.Companion.fahrenheitToCelsius
+import com.example.Android_weather_app.databinding.CurrentConditionBinding
+import com.example.Android_weather_app.databinding.DailyFragmentItemBinding
+import com.example.Android_weather_app.databinding.ForecastDayBinding
+import com.example.Android_weather_app.databinding.ForecastHourBinding
+import com.example.Android_weather_app.databinding.HourFragmentItemBinding
+import com.example.Android_weather_app.databinding.SunMoonBinding
+import com.example.Android_weather_app.databinding.TempBinding
 
 class ChildAdapter(private val ViewType : Int
                    , private val CurrentConditionList : List<Current_Condition> = listOf()

@@ -1,4 +1,4 @@
-package com.example.android_template.data.Model
+package com.example.Android_weather_app.data.Model
 
 class DataType {
 

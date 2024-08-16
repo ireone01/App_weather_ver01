@@ -1,16 +1,16 @@
-package com.example.android_template.Screen.Search
+package com.example.Android_weather_app.Screen.Search
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.android_template.R
-import com.example.android_template.Screen.Home.DailyFragment
-import com.example.android_template.Screen.Home.HomeFragment
-import com.example.android_template.Screen.Home.HourlyFragment
-import com.example.android_template.Screen.Home.RadaFragment
-import com.example.android_template.databinding.FragmentNavigationBinding
+import com.example.Android_weather_app.R
+import com.example.Android_weather_app.Screen.Home.DailyFragment
+import com.example.Android_weather_app.Screen.Home.HomeFragment
+import com.example.Android_weather_app.Screen.Home.HourlyFragment
+import com.example.Android_weather_app.Screen.Home.RadaFragment
+import com.example.Android_weather_app.databinding.FragmentNavigationBinding
 
 class NavigationFragment : Fragment() {
     private lateinit var binding: FragmentNavigationBinding

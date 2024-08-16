@@ -1,4 +1,4 @@
-package com.example.android_template.Utils.Base
+package com.example.Android_weather_app.Utils.Base
 
 import android.os.Build
 import android.util.Log

@@ -1,10 +1,10 @@
-package com.example.android_template
+package com.example.Android_weather_app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.android_template.Screen.Home.HomeFragment
-import com.example.android_template.Screen.Search.NavigationFragment
-import com.example.android_template.databinding.ActivityMainBinding
+import com.example.Android_weather_app.Screen.Home.HomeFragment
+import com.example.Android_weather_app.Screen.Search.NavigationFragment
+import com.example.Android_weather_app.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
