@@ -1,4 +1,4 @@
-package com.example.Android_weather_app.Screen.Home
+package com.example.android_template.Screen.Home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.Android_weather_app.Api.Api
-import com.example.Android_weather_app.AppDatabase
-import com.example.Android_weather_app.NetworkUtils.isInternetAvailable
-import com.example.Android_weather_app.data.Model.Data
-import com.example.Android_weather_app.databinding.DailyFragmentBinding
-import com.example.Android_weather_app.data.Respository.Source.Remote.FetchJson.fetDailyFragment
+import com.example.android_template.Api.Api
+import com.example.android_template.AppDatabase
+import com.example.android_template.NetworkUtils.isInternetAvailable
+import com.example.android_template.data.Model.Data
+import com.example.android_template.databinding.DailyFragmentBinding
+import com.example.android_template.data.Respository.Source.Remote.FetchJson.fetDailyFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

@@ -1,4 +1,4 @@
-package com.example.Android_weather_app.Screen.Search
+package com.example.android_template.Screen.Search
 
 import android.os.Build
 import android.os.Bundle
@@ -14,12 +14,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.example.Android_weather_app.Api.Api
-import com.example.Android_weather_app.AppDatabase
-import com.example.Android_weather_app.NetworkUtils.isInternetAvailable
-import com.example.Android_weather_app.R
-import com.example.Android_weather_app.Utils.Base.calculateDuration.Companion.fahrenheitToCelsius
-import com.example.Android_weather_app.databinding.FragmentAppBarBinding
+import com.example.android_template.Api.Api
+import com.example.android_template.AppDatabase
+import com.example.android_template.NetworkUtils.isInternetAvailable
+import com.example.android_template.R
+import com.example.android_template.Utils.Base.calculateDuration.Companion.fahrenheitToCelsius
+import com.example.android_template.databinding.FragmentAppBarBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -94,7 +94,7 @@ class AppBarFragment : Fragment() {
     private fun fetchData(city: String) {
         lifecycleScope.launch {
             if(isInternetAvailable(requireContext())) {
-                val apiKey = Api.Apikey3
+                val apiKey = Api.Apikey
                 val client = OkHttpClient()
                 val locationKey = withContext(Dispatchers.IO) {
                     val locationUrl =

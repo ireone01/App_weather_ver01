@@ -1,4 +1,4 @@
-package com.example.Android_weather_app.Screen.Home
+package com.example.android_template.Screen.Home
 
 import android.os.Build
 import android.view.LayoutInflater
@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.Android_weather_app.Daily_FragmentItem
-import com.example.Android_weather_app.data.Model.Data
-import com.example.Android_weather_app.data.Model.DataType
-import com.example.Android_weather_app.Utils.Base.calculateDuration.Companion.extractDay
-import com.example.Android_weather_app.databinding.ACurrentConditionBinding
+import com.example.android_template.Daily_FragmentItem
+import com.example.android_template.data.Model.Data
+import com.example.android_template.data.Model.DataType
+import com.example.android_template.Utils.Base.calculateDuration.Companion.extractDay
+import com.example.android_template.databinding.ACurrentConditionBinding
 
 class DailyAdapter(private val weather : List<Data>) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>(){
@@ -55,7 +55,7 @@ class DailyAdapter(private val weather : List<Data>) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
        val data = weather[position]
         when(data) {
-            is com.example.Android_weather_app.data.Model.Data.DailyFragmentData ->{
+            is com.example.android_template.data.Model.Data.DailyFragmentData ->{
                 if(holder is ACurrentConditionHolder){
                     holder.bindDailyFragment(data.dailyFragmentList)
                 }

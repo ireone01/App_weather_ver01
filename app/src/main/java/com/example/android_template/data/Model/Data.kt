@@ -1,11 +1,11 @@
-package com.example.Android_weather_app.data.Model
+package com.example.android_template.data.Model
 
-import com.example.Android_weather_app.Current_Condition
-import com.example.Android_weather_app.Daily_FragmentItem
-import com.example.Android_weather_app.Forecast_Day
-import com.example.Android_weather_app.Forecast_Hour
-import com.example.Android_weather_app.Hourly_FragmentItem
-import com.example.Android_weather_app.Sun_Moon
+import com.example.android_template.Current_Condition
+import com.example.android_template.Daily_FragmentItem
+import com.example.android_template.Forecast_Day
+import com.example.android_template.Forecast_Hour
+import com.example.android_template.Hourly_FragmentItem
+import com.example.android_template.Sun_Moon
 
 
 sealed class Data {
